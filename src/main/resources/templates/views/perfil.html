@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Perfil</title>
+  <link href="../static/css/Layout.css" th:href="@{/css/Layout.css}" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body>
+  <nav th:replace="components/navbar :: nav_bar"></nav>
+  <div class="container">
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+      <img src="/static/Images/bolsaCompra.jpg" alt="bolsaCompra" ><h6 class="border-bottom pb-2 mb-0">Mis Facturas</h6>
+      <div th:each="pedido : ${pedidos}" class="list-group w-auto facturasList">
+        <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+          <div class="d-flex gap-2 w-100 justify-content-between">
+            <div>
+              <h6 class="mb-0">Tipo: Factura <span th:text="${pedido.factura.usuario.nombre}"></span></h6>
+              <p class="mb-0 opacity-75">Monto total: <span th:text="${pedido.total}"></span></p>
+              <p class="mb-0 opacity-75">Numero de pedido: <span th:text="${pedido.id}"></span></p>
+            </div>
+          </div>
+        </a>
+      </div>
+      <small class="d-block text-end mt-3">
+        <a href="/pedidos/facturas">Ver todos</a>
+      </small>
+    </div>
+    <div style="display: flex">
+      <div class="card w-50 rounded shadow-sm" style="border: white">
+        <div class="card-body">
+          <h5 class="card-title">Mis Datos</h5>
+          <p class="card-text">Nombre: <span th:text="${usuario.nombre}"></span></p>
+          <p class="card-text">Apellido: <span th:text="${usuario.apellido}"></span></p>
+          <p class="card-text">DNI: <span th:text="${usuario.dni}"></span></p>
+          <p class="card-text">Telefono: <span th:text="${usuario.telefono}"></span></p>
+          <p class="card-text">Mail: <span th:text="${usuario.mail}"></span></p>
+          <a href="/usuarios/formulario" class="btn btn-primary" style="background-color: #ff6000; border-color: #ff6000">Editar Datos</a>
+        </div>
+      </div>
+      <div class="card w-50 rounded shadow-sm" style="border: white">
+        <div class="card-body">
+          <h5 class="card-title">Mis Domicilios</h5>
+          <p ><span>Retiro por sucursal</span></p>
+          <p class="card-text">Provincia: Mendoza</p>
+          <p class="card-text">Nombre Local: Mendoza</p>
+          <p class="card-text">Domicilio: Juan B Justo 130</p>
+          <p class="card-text">CodigoPostal: 5500</p>
+          <a href="#" class="btn btn-primary" style="background-color: #ff6000; border-color: #ff6000">Editar Datos</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+</html>

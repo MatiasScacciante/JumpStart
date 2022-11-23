@@ -1,0 +1,16 @@
+<div th:fragment="_card" class="card my-2">
+    <img th:src="@{'/imagenes/'} + ${producto.imagen}" class="card-img-top" alt="producto imagen">
+    <div class="card-body">
+        <h5 class="card-title"th:text="${producto.titulo}">Card title</h5>
+        <p class="card-text">Precio : <span th:text="${producto.precio}">1</span></p>
+        <a th:href="@{/productos/{id}/detalle(id=${producto.id})}" class="btn btn-secondary btn-block">
+            Ver Detalle
+        </a>
+    </div>
+
+</div>
+<div th:fragment="categoria_li">
+    <li class="nav-item">
+        <a class="nav-link active" style="color: #f78001;" aria-current="page" th:href="@{/productos/categorias/{id}(id=${categoria.id})}" th:text="${categoria.nombre}">Li title</a>
+    </li>
+</div>

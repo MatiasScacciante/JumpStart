@@ -1,0 +1,7 @@
+.bg-orange{
+    background-color: #f78001;
+}
+
+.facturasList a:hover{
+    background-color: rgb(247, 128, 1, 40%);
+}

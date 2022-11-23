@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <link href="../static/css/Layout.css" th:href="@{/css/Layout.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <title>Inicio</title>
+</head>
+<body>
+<nav th:replace="components/navbar :: nav_bar"></nav>
+<div class="container" style="margin-top: 20px">
+    <div class="position-absolute start-0 ms-1 mt-2 border border-2 rounded-2">
+        <ul class="nav flex-column .bg-secondary">
+            <div class="ms-1">Filtros:</div>
+            <div class="ms-2">Categorias:</div>
+            <div th:each="categoria : ${categorias}">
+                <div th:replace="components/card :: categoria_li"></div>
+            </div>
+            <div class="ms-2">Precios:</div>
+            <li><a class="nav-link active" style="color: #f78001;" th:href="@{/productos/priceasc}" >Más Barato</a></li>
+            <li><a class="nav-link active" style="color: #f78001;" th:href="@{/productos/pricedesc}" >Más Caro</a></li>
+            <li class="ms-2">
+                <form class="form-inline my-2 my-lg-0" th:action="@{/productos/price}">
+                    Desde:<input class="form-control ms-1 mt-2 mb-2 x|mr-sm-2 w-50" type="search" placeholder="Precio Minimo" aria-label="Search" name="pricemin">
+                    Hasta:<input class="form-control ms-1 mr-sm-2 w-50 mb-2" type="search" placeholder="Precio Maximo" aria-label="Search" name="pricemax">
+                    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Aplicar</button>
+                </form>
+            </li>
+            <div class="mt-2 mb-2"></div>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-10 col-md-3" th:each="producto : ${productos}">
+            <div th:replace="components/card :: _card"></div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+</html>

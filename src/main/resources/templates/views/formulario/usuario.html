@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link href="../static/css/Layout.css" th:href="@{/css/Layout.css}" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <title>Formulario Producto</title>
+</head>
+<body>
+<nav th:replace="components/navbar :: nav_bar"></nav>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <form th:action="@{/usuarios/formulario/{id}(id=${usuario.id})}" method="post" th:object="${usuario}" enctype="multipart/form-data">
+            <div class="row g-3">
+              <div class="form-group col-md-12">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" th:field="*{nombre}">
+                <div class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+              </div>
+              <div class="form-group col-md-12">
+                <label for="apellido">Apellido:</label>
+                <input type="text" class="form-control" id="apellido" th:field="*{apellido}">
+                <div class="text-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></div>
+              </div>
+              <div class="form-group col-md-12">
+                <label for="mail">Mail:</label>
+                <input type="text" class="form-control" id="mail" th:field="*{mail}">
+                <div class="text-danger" th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}"></div>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="cuil">CUIL:</label>
+                <input type="number" class="form-control" id="cuil" th:field="*{cuil}">
+                <div class="text-danger" th:if="${#fields.hasErrors('cuil')}" th:errors="*{cuil}"></div>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="dni">DNI:</label>
+                <input type="number" class="form-control" id="dni" th:field="*{dni}">
+                <div class="text-danger" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></div>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="telefono">Telefono:</label>
+                <input type="number" class="form-control" id="telefono" th:field="*{telefono}">
+                <div class="text-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div>
+              </div>
+            </div>
+            <div class="row m-3">
+              <div class="col-md-6">
+                <button class="btn btn-outline-secondary" type="reset" style="width:100%">Resetear
+                  Formulario
+                </button>
+              </div>
+              <div class="col-md-6">
+                <button class="btn btn-success" type="submit" style="width:100%">Guardar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
