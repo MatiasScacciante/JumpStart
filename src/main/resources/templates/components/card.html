@@ -1,5 +1,5 @@
 <div th:fragment="_card" class="card my-2">
-    <img th:src="@{'/imagenes/'} + ${producto.imagen}" class="card-img-top" alt="producto imagen">
+    <img th:src="@{'/imagenes/'} + ${producto.imagen}" class="card-img-top" style="height: 200px; width: 200px";alt="producto imagen">
     <div class="card-body">
         <h5 class="card-title"th:text="${producto.titulo}">Card title</h5>
         <p class="card-text">Precio : <span th:text="${producto.precio}">1</span></p>

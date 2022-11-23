@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -191,7 +192,7 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
     }
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/{id}/eliminar")
-    public String eliminarProducto(Model model,@PathVariable("id")long id){
+    public String eliminarProducto(Model model,@PathVariable("id") long id){
         try {
             model.addAttribute("producto",this.svcProducto.findById(id));
             return "views/formulario/eliminar";
@@ -203,7 +204,7 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/{id}/eliminar")
-    public String desactivarProducto(Model model,@PathVariable("id")long id){
+    public String desactivarProducto(Model model,@PathVariable("id") long id){
         try {
             this.svcProducto.delete(id);
             return "redirect:/crud";

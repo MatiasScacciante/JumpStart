@@ -4,10 +4,7 @@ import com.example.jumpstart.ecommerce.entities.Pedido;
 import com.example.jumpstart.ecommerce.entities.PedidoProducto;
 import com.example.jumpstart.ecommerce.entities.Producto;
 import com.example.jumpstart.ecommerce.entities.Usuario;
-import com.example.jumpstart.ecommerce.services.PedidoProductoService;
-import com.example.jumpstart.ecommerce.services.PedidoService;
-import com.example.jumpstart.ecommerce.services.PedidoServiceImpl;
-import com.example.jumpstart.ecommerce.services.ProductoService;
+import com.example.jumpstart.ecommerce.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,6 +29,9 @@ public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceIm
 
     @Autowired
     private PedidoService svcPedido;
+
+    @Autowired
+    private UsuarioService svcUsuario;
 
     @Autowired
     private ProductoService svcProducto;
@@ -70,11 +70,12 @@ public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceIm
         }
     }
     @GetMapping("/facturas")
-    public String perfil(HttpSession http, ModelMap modelo){
+    public String perfil(HttpSession http, ModelMap modelo) throws Exception {
         Usuario logueado = (Usuario) http.getAttribute("usuariosession");
+        Usuario usuario = svcUsuario.findById(logueado.getId());
         try{
             modelo.put("usuario", logueado);
-            modelo.addAttribute("pedidos", pedidoService.pedidosFacturados());
+            modelo.addAttribute("pedidos", pedidoService.pedidosFacturados(usuario));
         }catch (Exception e){
             modelo.put("error", e.getMessage());
         }finally {

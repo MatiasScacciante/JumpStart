@@ -1,6 +1,7 @@
 package com.example.jumpstart.ecommerce.repositories;
 
 import com.example.jumpstart.ecommerce.entities.Pedido;
+import com.example.jumpstart.ecommerce.entities.Usuario;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -21,6 +22,6 @@ public interface PedidoRepository extends BaseRepository<Pedido, Long>{
             nativeQuery = true)
     Pedido activePedido(@Param("fk_usuario") long fk_usuario);
 
-    @Query("SELECT p FROM Pedido p WHERE p.factura IS NOT NULL")
-    public List<Pedido> pedidosConFactura();
+    @Query("SELECT p FROM Pedido p WHERE p.factura IS NOT NULL AND p.factura.usuario = :usuario")
+    public List<Pedido> pedidosConFactura(@Param("usuario") Usuario usuario);
 }

@@ -47,11 +47,12 @@ public class UsuarioController extends BaseControllerImpl<Usuario, UsuarioServic
     }
 
     @GetMapping("/compras")
-    public String perfil(HttpSession http, ModelMap modelo){
+    public String perfil(HttpSession http, ModelMap modelo) throws Exception {
         Usuario logueado = (Usuario) http.getAttribute("usuariosession");
+        Usuario usuario = svcUsuario.findById(logueado.getId());
         try{
             modelo.put("usuario", logueado);
-            modelo.addAttribute("pedidos", pedidoService.pedidosFacturados());
+            modelo.addAttribute("pedidos", pedidoService.pedidosFacturados(usuario));
         }catch (Exception e){
             modelo.put("error", e.getMessage());
         }finally {
@@ -61,11 +62,12 @@ public class UsuarioController extends BaseControllerImpl<Usuario, UsuarioServic
     }
 
     @GetMapping("/perfil")
-    public String perfil(ModelMap modelo, HttpSession http) {
+    public String perfil(ModelMap modelo, HttpSession http) throws Exception {
         Usuario logueado = (Usuario) http.getAttribute("usuariosession");
+        Usuario usuario = svcUsuario.findById(logueado.getId());
         try{
             modelo.put("usuario", logueado);
-            modelo.addAttribute("pedidos", pedidoService.pedidosFacturados());
+            modelo.addAttribute("pedidos", pedidoService.pedidosFacturados(usuario));
         }catch (Exception e){
             modelo.put("error", e.getMessage());
         }finally {

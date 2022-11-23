@@ -2,6 +2,7 @@ package com.example.jumpstart.ecommerce.services;
 
 import com.example.jumpstart.ecommerce.entities.Pedido;
 
+import com.example.jumpstart.ecommerce.entities.Usuario;
 import com.example.jumpstart.ecommerce.repositories.BaseRepository;
 import com.example.jumpstart.ecommerce.repositories.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -36,9 +36,10 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
         return pedido;
     }
 
+
     @Override
-    public List<Pedido> pedidosFacturados() throws Exception {
-        List<Pedido> pedidos = pedidoRepository.pedidosConFactura();
+    public List<Pedido> pedidosFacturados(Usuario usuario) throws Exception {
+        List<Pedido> pedidos = pedidoRepository.pedidosConFactura(usuario);
         return pedidos;
     }
 }

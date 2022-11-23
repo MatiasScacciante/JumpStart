@@ -190,7 +190,7 @@ public class MainController {
         pedido = new Pedido();
         pedidoProductos.clear();
 
-        List<Pedido> pedidos = svcPedido.pedidosFacturados();
+        List<Pedido> pedidos = svcPedido.pedidosFacturados(usuario1);
         modelo.addAttribute("pedidos", pedidos);
         modelo.addAttribute("usuario", usuario1);
         return "redirect:/usuarios/compras";
